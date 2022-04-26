@@ -1,0 +1,13 @@
+SELECT     
+geoobjects_flat.id,
+geoobjects_flat.class_name,
+geoobjects_flat.name,
+geoobjects_flat.ufi,
+geoobjects_flat.cc1,
+geoobjects_flat.geom,
+geoobjects_flat.origin,
+get_json_object(`attributes`, '$.protection_category')  AS protection_category,
+get_json_object(`attributes`, '$.landmark_id')  AS landmark_id
+    
+FROM geo.geoobjects_flat
+WHERE get_json_object(`attributes`, '$.protection_category') IS NOT NULL AND geoobjects_flat.cc1 = 'us'
